@@ -7,11 +7,32 @@ img {
     max-height: 50px;
 }
 
+button {
+    /* float: right; */
+    height: 50px;
+    margin-left: 90px;
+}
+
+#Dice-Container {
+    border-collapse: collapse;
+    padding: 10px;
+    border: 3px solid orangered;
+}
+
 #Value-Container{
     display: grid;
     grid-template-columns: auto auto;
+    padding: 25px;
+    border: 3px solid orangered;
 }
 
 #Value-Container input {
-    width: 10%;
+    width: 40px;
+}
+
+#Background {
+    background: linear-gradient(360deg, orange 50%, yellow 100%);
+    padding: 25px;
+    width: 300px;
+    min-width: 300px;
 }

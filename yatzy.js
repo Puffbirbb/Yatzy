@@ -8,11 +8,6 @@ let values = new Array(5);
 
 let throwCount = 0;
 
-
-/**Random number between 1 and 5 generator */
-let randomNumber = Math.floor(Math.random() * 5) + 1;
-
-
 /**
 * Reset the throw count.
  */
@@ -25,19 +20,16 @@ throwCount = 0;
 * Note: holdStatus[i] is true, if die no. i is hold (for i in [0..4]).
 */
 function throwDice(holdStatus) {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i <= 5; i++) {
       if (holdStatus[i] === false) {
-        values[i] = randomNumber
+        values[i] = Math.floor(Math.random() * 6 + 1);
+        console.log(values[i]);
       }
     }
     throwCount++;
-  }
+}
 
 //------------------------------------------------------------------------------
-function getResults() {
-let results = new Array(15);
-
-}
 
 /** Creates an array the size of 7
  * Iterates through the values array and adds the value of each die to the array.
@@ -202,7 +194,7 @@ function frequency() {
    */
 function yatzyPoints(){
   let sum = 0;
-  for(let i = 1; i < frequency.length; i++){
+  for(let i = 1; i < frequency().length; i++){
       if(frequency()[i] >= 5){
         sum = 50;
       }
@@ -243,14 +235,121 @@ function getResults() {
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 
-let Names = ["1-s", "2-s", "3-s", "4-s", "5-s", "6-s", "One Pair", "Two Pair", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight", "Large Straight", "Chance", "Yatzy"];
+let resetGame = function () {
+  resetThrowCount();
+  for (let i = 1; i <= 5; i++) {
+    let dice = document.getElementById("dice"+i);
+    dice.src = "./Dice/" + i + ".png"
+  }
+  document.querySelector("button").disabled = false;
+  document.querySelector("span").innerHTML = "Roll Counter: " + throwCount;
+}
 
-for (let i = 0; i < 15; i++) {
+document.querySelector("span").innerHTML += throwCount;
+
+let Names = ["1-s", "2-s", "3-s", "4-s", "5-s", "6-s", "One Pair", "Two Pair", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight", "Large Straight", "Chance", "Yatzy", "Sum", "Bonus", "Total"];
+
+for (let i = 0; i < 18; i++) {
   let label = document.createElement("label");
   label.innerHTML = Names[i];
   document.getElementById("Value-Container").appendChild(label);
   let input = document.createElement("input");
   document.getElementById("Value-Container").appendChild(input);
   input.type = "number";
+  input.readOnly = true;
+  input.id = i;
+}
+
+let holdStatusList = [false, false, false, false, false]
+
+let valuesChange = function() {
+  let results = getResults();
+  for (let i = 0; i < results.length; i++) {
+    document.getElementById(i).value = results[i];
+  }
+}
+
+let roll = function(){
+  throwDice(holdStatusList);
+  document.querySelector("span").innerHTML = "Roll Counter: " + throwCount;
+  for (let i = 1; i <= 5; i++){
+    let dice = document.getElementById("dice"+i);
+    dice.src = "./Dice/" + values[i-1] + ".png"
+  }
+  if (throwCount === 3){
+    document.querySelector("button").disabled = true;
+  }
+  valuesChange();
+}
+
+let rollButton = document.querySelector("button");
+rollButton.onclick = () => roll();
+
+let dice1 = document.getElementById("dice1");
+let dice2 = document.getElementById("dice2");
+let dice3 = document.getElementById("dice3");
+let dice4 = document.getElementById("dice4");
+let dice5 = document.getElementById("dice5");
+
+let ones = document.getElementById(0);
+let twos = document.getElementById(1);
+let threes = document.getElementById(2);
+let fours = document.getElementById(3);
+let fives = document.getElementById(4);
+let sixes = document.getElementById(5);
+let onePair = document.getElementById(6);
+let twoPair = document.getElementById(7);
+let threeOAK = document.getElementById(8);
+let fourOAK = document.getElementById(9);
+let fullHouse = document.getElementById(10);
+let smallStraight = document.getElementById(11);
+let largeStraight = document.getElementById(12);
+let chance = document.getElementById(13);
+let yatzy = document.getElementById(14);
+let sum = document.getElementById(15);
+
+dice1.onclick = () => {
+  if (throwCount != 0){
+    holdStatusList[0] = true;
+  }
+}
+
+dice2.onclick = () => {
+  if (throwCount != 0){
+    holdStatusList[1] = true;
+  }
+}
+
+dice3.onclick = () => {
+  if (throwCount != 0){
+    holdStatusList[2] = true;
+  }
+}
+
+dice4.onclick = () => {
+  if (throwCount != 0){
+    holdStatusList[3] = true;
+  }
+
+}
+
+dice5.onclick = () => {
+  if (throwCount != 0){
+    holdStatusList[4] = true;
+  }
+}
+
+ones.onclick = () => {
+  if (throwCount != 0){
+    sum.value += parseInt(ones.value);
+    resetGame();
+  }
+}
+
+twos.onclick = () => {
+  if (throwCount!= 0){
+    sum.value += parseInt(twos.value);
+    resetGame();
+  }
 }
 
