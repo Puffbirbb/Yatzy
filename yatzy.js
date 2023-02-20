@@ -23,7 +23,6 @@ function throwDice(holdStatus) {
     for (let i = 0; i <= 5; i++) {
       if (holdStatus[i] === false) {
         values[i] = Math.floor(Math.random() * 6 + 1);
-        console.log(values[i]);
       }
     }
     throwCount++;
@@ -241,6 +240,7 @@ let resetGame = function () {
     let dice = document.getElementById("dice"+i);
     dice.src = "./Dice/" + i + ".png"
     dice.style.border = "";
+    dice.style.borderRadius = "";
   }
   document.querySelector("button").disabled = false;
   document.querySelector("span").innerHTML = "Roll Counter: " + throwCount;
@@ -289,13 +289,12 @@ let roll = function(){
 let rollButton = document.querySelector("button");
 rollButton.onclick = () => roll();
 
-let dice1 = document.getElementById("dice1");
-let dice2 = document.getElementById("dice2");
-let dice3 = document.getElementById("dice3");
-let dice4 = document.getElementById("dice4");
-let dice5 = document.getElementById("dice5");
+let sum = document.getElementById("15");
+let bonus = document.getElementById("16");
+let total = document.getElementById("17");
 
-// Gennemløber alle dice og kontroller om de bliver clicket, nok ikke effektivt, men 10 gange kortere.
+
+// Gennemløber alle dice og kontroller om de bliver clicket, nok ikke effektivt, men 10 gange kortere end det før.
 
 for (let i = 1; i <= 5; i++) {
   let dice = document.getElementById("dice"+i);
@@ -308,7 +307,7 @@ for (let i = 1; i <= 5; i++) {
   }
 }
 
-// Gennemløber alle inputs og kontroller om de bliver clicket, nok ikke effektivt, men 10 gange kortere.
+// Gennemløber alle inputs og kontroller om de bliver clicket, nok ikke effektivt, men 10 gange kortere end det før.
 
 for (var i = 0; i <= 17; i++) {
   let inputs = document.getElementById(i);
@@ -321,14 +320,18 @@ for (var i = 0; i <= 17; i++) {
         inputs.disabled = true;
         resetGame();
       }
-    }
-  } else {
-      inputs.onclick = () => {
-        const num1 = (+sum.value + +inputs.value);
-        const num2 = total.value;
-        total.value = parseInt(+num1 + +num2);
-        inputs.disabled = true;
-        resetGame();
+      if (sum.value >= 63){
+        bonus.value = 50;
       }
+    }
+  }
+  else {
+    inputs.onclick = () => {
+      const num1 = (+sum.value + +inputs.value);
+      const num2 = total.value;
+      total.value = parseInt(+num1 + +num2);
+      inputs.disabled = true;
+      resetGame();
+    }
   }
 }
