@@ -4,10 +4,6 @@
 1 <= values[i] <= 6 for i in [0..4]
 */
 
-
-/**NUmber of times the 5 dices have been thrown¨
- * 0 <= throwCount <= 3
- */
 let values = new Array(5);
 
 let throwCount = 0;
@@ -104,5 +100,57 @@ function frequency() {
   }
 
  //------------------------------------------------------------------------------
+ //Same points
+
+ /**Return points of 3 of a kind
+  * Return 0 if there aren't 3 of a kind.
+  */
+ function threeSamePoints() {
+    let sum = 0;
+    for (let i = 1; i < frequency.length; i++) {
+        if (frequency[i] >= 3) {
+            sum = i * 3;
+        }
+    }
+    return sum;
+ }
+
+ /**Return points of 4 of a kind
+  * Return 0 if there aren't 4 of a kind.
+  */
+ function fourSamePoints() {
+    let sum = 0;
+    for (let i = 1; i < frequency.length; i++) {
+        if (frequency[i] >= 4) {
+            sum = i * 4;
+        }
+    }
+    return sum;
+ }
+
+ /**Return points of full house
+  * Return 0 if there aren't 3 with the same face value and two with the same face value.
+  */
+ function fullHousePoints() {
+    let threeOfAKind = 0;
+    let twoOfAKind = 0;
+  
+    for (let i = 1; i < frequency.length; i++) {
+      if (frequency[i] >= 3) {
+        threeOfAKind = i * 3;
+        break;
+      }
+    }
+  
+    for (let j = 1; j < frequency.length; j++) {
+      if (frequency[j] >= 2 && j !== threeOfAKind / 3) {
+        twoOfAKind = j * 2;
+        break;
+      }
+    }
+  
+    return threeOfAKind && twoOfAKind ? threeOfAKind + twoOfAKind : 0;
+  }
+
 
 
