@@ -200,14 +200,57 @@ function frequency() {
   /**Returns points for yatzy(50 points)
    * Return 0, if there aren't 5 dice with the same face value.
    */
-  function yatzyPoints(){
-    let sum = 0;
-    for(let i = 1; i < frequency.length; i++){
-        if(frequency()[i]!== 5){
-            sum = 50;
-        }
-    }
-    return sum;
+function yatzyPoints(){
+  let sum = 0;
+  for(let i = 1; i < frequency.length; i++){
+      if(frequency()[i] >= 5){
+        sum = 50;
+      }
   }
+  return sum;
+}
 
+function getResults() {
+  let results = new Array(15);
+  for (let i = 0; i < 6; i++) {
+      let value = i + 1;
+      let points = 0;
+      for (let j = 0; j < values.length; j++) {
+          if (values[j] === value) {
+              points += value;
+          }
+      }
+      results[i] = points;
+  }
+  results[6] = onePairPoints();
+  results[7] = twoPairPoints();
+  results[8] = threeSamePoints();
+  results[9] = fourSamePoints();
+  results[10] = fullHousePoints();
+  results[11] = smallStraightPoints();
+  results[12] = largeStraightPoints();
+  results[13] = chancePoints();
+  results[14] = yatzyPoints();
+
+  return results;
+}
+
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+  // GUI Functions
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+
+let Names = ["1-s", "2-s", "3-s", "4-s", "5-s", "6-s", "One Pair", "Two Pair", "Three of a Kind", "Four of a Kind", "Full House", "Small Straight", "Large Straight", "Chance", "Yatzy"];
+
+for (let i = 0; i < 15; i++) {
+  let label = document.createElement("label");
+  label.innerHTML = Names[i];
+  document.getElementById("Value-Container").appendChild(label);
+  let input = document.createElement("input");
+  document.getElementById("Value-Container").appendChild(input);
+  input.type = "number";
+}
 
