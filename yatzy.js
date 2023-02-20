@@ -266,7 +266,9 @@ let holdStatusList = [false, false, false, false, false];
 let valuesChange = function() {
   let results = getResults();
   for (let i = 0; i < results.length; i++) {
-    document.getElementById(i).value = results[i];
+    if (document.getElementById(i).disabled === false) {
+      document.getElementById(i).value = results[i];
+    }
   }
 }
 
@@ -314,24 +316,32 @@ let total = document.getElementById(17);
 dice1.onclick = () => {
   if (throwCount != 0){
     holdStatusList[0] = true;
+    dice1.style.border = "2px solid #2BC232";
+    dice1.style.borderRadius = "14px";
   }
 }
 
 dice2.onclick = () => {
   if (throwCount != 0){
     holdStatusList[1] = true;
+    dice2.style.border = "2px solid #2BC232";
+    dice2.style.borderRadius = "14px";
   }
 }
 
 dice3.onclick = () => {
   if (throwCount != 0){
     holdStatusList[2] = true;
+    dice3.style.border = "2px solid #2BC232";
+    dice3.style.borderRadius = "14px";
   }
 }
 
 dice4.onclick = () => {
   if (throwCount != 0){
     holdStatusList[3] = true;
+    dice4.style.border = "2px solid #2BC232";
+    dice4.style.borderRadius = "14px";
   }
 
 }
@@ -339,6 +349,8 @@ dice4.onclick = () => {
 dice5.onclick = () => {
   if (throwCount != 0){
     holdStatusList[4] = true;
+    dice5.style.border = "2px solid #2BC232";
+    dice5.style.borderRadius = "14px";
   }
 }
 
@@ -347,6 +359,7 @@ ones.onclick = () => {
     const num1 = sum.value;
     const num2 = ones.value;
     sum.value = parseInt(+num1 + +num2);
+    ones.disabled = true;
     resetGame();
   }
 }
@@ -356,6 +369,7 @@ twos.onclick = () => {
     const num1 = sum.value;
     const num2 = twos.value;
     sum.value = parseInt(+num1 + +num2);
+    twos.disabled = true;
     resetGame();
   }
 }
@@ -365,6 +379,7 @@ threes.onclick = () => {
     const num1 = sum.value;
     const num2 = threes.value;
     sum.value = parseInt(+num1 + +num2);
+    threes.disabled = true;
     resetGame();
   }
 }
@@ -374,6 +389,7 @@ fours.onclick = () => {
     const num1 = sum.value;
     const num2 = fours.value;
     sum.value = parseInt(+num1 + +num2);
+    fours.disabled = true;
     resetGame();
   }
 }
@@ -383,6 +399,7 @@ fives.onclick = () => {
     const num1 = sum.value;
     const num2 = fives.value;
     sum.value = parseInt(+num1 + +num2);
+    fives.disabled = true;
     resetGame();
   }
 }
@@ -392,6 +409,7 @@ sixes.onclick = () => {
     const num1 = sum.value;
     const num2 = sixes.value;
     sum.value = parseInt(+num1 + +num2);
+    sixes.disabled = true;
     resetGame();
   }
 }
@@ -401,6 +419,7 @@ onePair.onclick = () => {
     const num1 = (+sum.value + +onePair.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    onePair.disabled = true;
     resetGame();
   }
 }
@@ -410,6 +429,7 @@ twoPair.onclick = () => {
     const num1 = (+sum.value + +twoPair.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    twoPair.disabled = true;
     resetGame();
   }
 }
@@ -419,6 +439,7 @@ threeOAK.onclick = () => {
     const num1 = (+sum.value + +threeOAK.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    threeOAK.disabled = true;
     resetGame();
   }
 }
@@ -428,6 +449,7 @@ fourOAK.onclick = () => {
     const num1 = (+sum.value + +fourOAK.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    fourOAK.disabled = true;
     resetGame();
   }
 }
@@ -437,6 +459,7 @@ fullHouse.onclick = () => {
     const num1 = (+sum.value + +fullHouse.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    fullHouse.disabled = true;
     resetGame();
   }
 }
@@ -446,6 +469,7 @@ smallStraight.onclick = () => {
     const num1 = (+sum.value + +smallStraight.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    smallStraight.disabled = true;
     resetGame();
   }
 }
@@ -455,6 +479,7 @@ largeStraight.onclick = () => {
     const num1 = (+sum.value + +largeStraight.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    largeStraight.disabled = true;
     resetGame();
   }
 }
@@ -464,6 +489,7 @@ chance.onclick = () => {
     const num1 = (+sum.value + +chance.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    chance.disabled = true;
     resetGame();
   }
 }
@@ -473,6 +499,7 @@ yatzy.onclick = () => {
     const num1 = (+sum.value + +yatzy.value);
     const num2 = total.value;
     total.value = parseInt(+num1 + +num2);
+    yatzy.disabled = true;
     resetGame();
   }
 }
