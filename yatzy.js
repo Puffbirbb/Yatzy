@@ -240,6 +240,7 @@ let resetGame = function () {
   for (let i = 1; i <= 5; i++) {
     let dice = document.getElementById("dice"+i);
     dice.src = "./Dice/" + i + ".png"
+    dice.style.border = "";
   }
   document.querySelector("button").disabled = false;
   document.querySelector("span").innerHTML = "Roll Counter: " + throwCount;
@@ -294,212 +295,40 @@ let dice3 = document.getElementById("dice3");
 let dice4 = document.getElementById("dice4");
 let dice5 = document.getElementById("dice5");
 
-let ones = document.getElementById(0);
-let twos = document.getElementById(1);
-let threes = document.getElementById(2);
-let fours = document.getElementById(3);
-let fives = document.getElementById(4);
-let sixes = document.getElementById(5);
-let onePair = document.getElementById(6);
-let twoPair = document.getElementById(7);
-let threeOAK = document.getElementById(8);
-let fourOAK = document.getElementById(9);
-let fullHouse = document.getElementById(10);
-let smallStraight = document.getElementById(11);
-let largeStraight = document.getElementById(12);
-let chance = document.getElementById(13);
-let yatzy = document.getElementById(14);
-let sum = document.getElementById(15);
-let bonus = document.getElementById(16);
-let total = document.getElementById(17);
+// Gennemløber alle dice og kontroller om de bliver clicket, nok ikke effektivt, men 10 gange kortere.
 
-dice1.onclick = () => {
-  if (throwCount != 0){
-    holdStatusList[0] = true;
-    dice1.style.border = "2px solid #2BC232";
-    dice1.style.borderRadius = "14px";
+for (let i = 1; i <= 5; i++) {
+  let dice = document.getElementById("dice"+i);
+  dice.onclick = () => {
+    if (throwCount!= 0){
+      holdStatusList[i-1] = true;
+      dice.style.border = "2px solid #2BC232";
+      dice.style.borderRadius = "14px";
+    }
   }
 }
 
-dice2.onclick = () => {
-  if (throwCount != 0){
-    holdStatusList[1] = true;
-    dice2.style.border = "2px solid #2BC232";
-    dice2.style.borderRadius = "14px";
-  }
-}
+// Gennemløber alle inputs og kontroller om de bliver clicket, nok ikke effektivt, men 10 gange kortere.
 
-dice3.onclick = () => {
-  if (throwCount != 0){
-    holdStatusList[2] = true;
-    dice3.style.border = "2px solid #2BC232";
-    dice3.style.borderRadius = "14px";
-  }
-}
-
-dice4.onclick = () => {
-  if (throwCount != 0){
-    holdStatusList[3] = true;
-    dice4.style.border = "2px solid #2BC232";
-    dice4.style.borderRadius = "14px";
-  }
-
-}
-
-dice5.onclick = () => {
-  if (throwCount != 0){
-    holdStatusList[4] = true;
-    dice5.style.border = "2px solid #2BC232";
-    dice5.style.borderRadius = "14px";
-  }
-}
-
-ones.onclick = () => {
-  if (throwCount != 0){
-    const num1 = sum.value;
-    const num2 = ones.value;
-    sum.value = parseInt(+num1 + +num2);
-    ones.disabled = true;
-    resetGame();
-  }
-}
-
-twos.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = sum.value;
-    const num2 = twos.value;
-    sum.value = parseInt(+num1 + +num2);
-    twos.disabled = true;
-    resetGame();
-  }
-}
-
-threes.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = sum.value;
-    const num2 = threes.value;
-    sum.value = parseInt(+num1 + +num2);
-    threes.disabled = true;
-    resetGame();
-  }
-}
-
-fours.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = sum.value;
-    const num2 = fours.value;
-    sum.value = parseInt(+num1 + +num2);
-    fours.disabled = true;
-    resetGame();
-  }
-}
-
-fives.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = sum.value;
-    const num2 = fives.value;
-    sum.value = parseInt(+num1 + +num2);
-    fives.disabled = true;
-    resetGame();
-  }
-}
-
-sixes.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = sum.value;
-    const num2 = sixes.value;
-    sum.value = parseInt(+num1 + +num2);
-    sixes.disabled = true;
-    resetGame();
-  }
-}
-
-onePair.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +onePair.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    onePair.disabled = true;
-    resetGame();
-  }
-}
-
-twoPair.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +twoPair.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    twoPair.disabled = true;
-    resetGame();
-  }
-}
-
-threeOAK.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +threeOAK.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    threeOAK.disabled = true;
-    resetGame();
-  }
-}
-
-fourOAK.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +fourOAK.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    fourOAK.disabled = true;
-    resetGame();
-  }
-}
-
-fullHouse.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +fullHouse.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    fullHouse.disabled = true;
-    resetGame();
-  }
-}
-
-smallStraight.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +smallStraight.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    smallStraight.disabled = true;
-    resetGame();
-  }
-}
-
-largeStraight.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +largeStraight.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    largeStraight.disabled = true;
-    resetGame();
-  }
-}
-
-chance.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +chance.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    chance.disabled = true;
-    resetGame();
-  }
-}
-
-yatzy.onclick = () => {
-  if (throwCount!= 0){
-    const num1 = (+sum.value + +yatzy.value);
-    const num2 = total.value;
-    total.value = parseInt(+num1 + +num2);
-    yatzy.disabled = true;
-    resetGame();
+for (var i = 0; i <= 17; i++) {
+  let inputs = document.getElementById(i);
+  if (i < 6){
+    inputs.onclick = () => {
+      if (throwCount!= 0){
+        const num1 = sum.value;
+        const num2 = inputs.value;
+        sum.value = parseInt(+num1 + +num2);
+        inputs.disabled = true;
+        resetGame();
+      }
+    }
+  } else {
+      inputs.onclick = () => {
+        const num1 = (+sum.value + +inputs.value);
+        const num2 = total.value;
+        total.value = parseInt(+num1 + +num2);
+        inputs.disabled = true;
+        resetGame();
+      }
   }
 }
