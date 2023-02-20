@@ -143,7 +143,7 @@ function frequency() {
     }
   
     for (let j = 1; j < frequency.length; j++) {
-      if (frequency[j] >= 2 && j !== threeOfAKind / 3) {
+      if (frequency[j] >= 2 && j != threeOfAKind / 3) {
         twoOfAKind = j * 2;
         break;
       }
@@ -151,6 +151,63 @@ function frequency() {
   
     return threeOfAKind && twoOfAKind ? threeOfAKind + twoOfAKind : 0;
   }
+  
+ //------------------------------------------------------------------------------
+ //Straights
 
+ /**Return points for small straight
+  * Return 0, if the dice aren't 1, 2, 3, 4 and 5
+  */
+ function smallStraightPoints() {
+    let sum = 0;
+    for (let i = 1; i < frequency.length - 1; i++) {
+        if(frequency()[i] !== 1){
+            return 0;
+        } else {
+            sum = 15;
+        }
+    }
+    return sum;
+ }
+
+ /**Return points for large straight
+  * Return 0, if the dice aren't 2, 3, 4, 5 and 6
+  */
+ function largeStraightPoints(){
+    let sum = 0;
+    for (let i = 0; i < frequency.length; i++) {
+        if(frequency()[i]!== 1){
+            return 0;
+        } else {
+            sum = 20;
+        }
+    }
+    return sum;
+ }
+
+ //------------------------------------------------------------------------------
+ // Chance and yatzy
+
+ /**Return points for chance(sum of face values)*/
+ function chancePoints() {
+    let points = 0;
+    for (let face of values) {
+      points += face;
+    }
+    return points;
+  }
+
+  /**Returns points for yatzy(50 points)
+   * Return 0, if there aren't 5 dice with the same face value.
+   */
+  function yatzyPoints(){
+    let sum = 0;
+    for(let i = 1; i < frequency.length; i++){
+        if(frequency()[i]!== 5){
+            sum = 50;
+        }
+    }
+    return sum;
+  }
 
 
