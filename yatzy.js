@@ -59,7 +59,7 @@ function frequency() {
    */
   function onePairPoints(){
     let sum = 0;
-    for(let i = 1; i < frequency.length; i++){
+    for(let i = 1; i < frequency().length; i++){
         if(frequency()[i] >= 2){
         sum += i * 2;
         }
@@ -75,12 +75,12 @@ function frequency() {
   function twoPairPoints() {
     let sum1 = 0;
     let sum2 = 0;
-    for (let i = 1; i < frequency.length; i++) {
-      if (frequency[i] >= 2) {
+    for (let i = 1; i < frequency().length; i++) {
+      if (frequency()[i] >= 2) {
         sum1 = i * 2;
   
-        for (let j = i + 1; j < frequency.length; j++) {
-          if (frequency[j] >= 2) {
+        for (let j = i + 1; j < frequency().length; j++) {
+          if (frequency()[j] >= 2) {
             sum2 = j * 2;
             break;
           }
@@ -99,8 +99,8 @@ function frequency() {
   */
  function threeSamePoints() {
     let sum = 0;
-    for (let i = 1; i < frequency.length; i++) {
-        if (frequency[i] >= 3) {
+    for (let i = 1; i < frequency().length; i++) {
+        if (frequency()[i] >= 3) {
             sum = i * 3;
         }
     }
@@ -112,8 +112,8 @@ function frequency() {
   */
  function fourSamePoints() {
     let sum = 0;
-    for (let i = 1; i < frequency.length; i++) {
-        if (frequency[i] >= 4) {
+    for (let i = 1; i < frequency().length; i++) {
+        if (frequency()[i] >= 4) {
             sum = i * 4;
         }
     }
@@ -127,15 +127,15 @@ function frequency() {
     let threeOfAKind = 0;
     let twoOfAKind = 0;
   
-    for (let i = 1; i < frequency.length; i++) {
-      if (frequency[i] >= 3) {
+    for (let i = 1; i < frequency().length; i++) {
+      if (frequency()[i] >= 3) {
         threeOfAKind = i * 3;
         break;
       }
     }
   
-    for (let j = 1; j < frequency.length; j++) {
-      if (frequency[j] >= 2 && j != threeOfAKind / 3) {
+    for (let j = 1; j < frequency().length; j++) {
+      if (frequency()[j] >= 2 && j != threeOfAKind / 3) {
         twoOfAKind = j * 2;
         break;
       }
@@ -152,7 +152,7 @@ function frequency() {
   */
  function smallStraightPoints() {
     let sum = 0;
-    for (let i = 1; i < frequency.length - 1; i++) {
+    for (let i = 1; i < frequency().length - 1; i++) {
         if(frequency()[i] !== 1){
             return 0;
         } else {
@@ -167,7 +167,7 @@ function frequency() {
   */
  function largeStraightPoints(){
     let sum = 0;
-    for (let i = 0; i < frequency.length; i++) {
+    for (let i = 0; i < frequency().length; i++) {
         if(frequency()[i]!== 1){
             return 0;
         } else {
@@ -243,6 +243,7 @@ let resetGame = function () {
   }
   document.querySelector("button").disabled = false;
   document.querySelector("span").innerHTML = "Roll Counter: " + throwCount;
+  holdStatusList = [false, false, false, false, false];
 }
 
 document.querySelector("span").innerHTML += throwCount;
@@ -260,7 +261,7 @@ for (let i = 0; i < 18; i++) {
   input.id = i;
 }
 
-let holdStatusList = [false, false, false, false, false]
+let holdStatusList = [false, false, false, false, false];
 
 let valuesChange = function() {
   let results = getResults();
@@ -307,6 +308,8 @@ let largeStraight = document.getElementById(12);
 let chance = document.getElementById(13);
 let yatzy = document.getElementById(14);
 let sum = document.getElementById(15);
+let bonus = document.getElementById(16);
+let total = document.getElementById(17);
 
 dice1.onclick = () => {
   if (throwCount != 0){
@@ -341,15 +344,135 @@ dice5.onclick = () => {
 
 ones.onclick = () => {
   if (throwCount != 0){
-    sum.value += parseInt(ones.value);
+    const num1 = sum.value;
+    const num2 = ones.value;
+    sum.value = parseInt(+num1 + +num2);
     resetGame();
   }
 }
 
 twos.onclick = () => {
   if (throwCount!= 0){
-    sum.value += parseInt(twos.value);
+    const num1 = sum.value;
+    const num2 = twos.value;
+    sum.value = parseInt(+num1 + +num2);
     resetGame();
   }
 }
 
+threes.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = sum.value;
+    const num2 = threes.value;
+    sum.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+fours.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = sum.value;
+    const num2 = fours.value;
+    sum.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+fives.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = sum.value;
+    const num2 = fives.value;
+    sum.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+sixes.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = sum.value;
+    const num2 = sixes.value;
+    sum.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+onePair.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +onePair.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+twoPair.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +twoPair.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+threeOAK.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +threeOAK.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+fourOAK.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +fourOAK.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+fullHouse.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +fullHouse.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+smallStraight.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +smallStraight.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+largeStraight.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +largeStraight.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+chance.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +chance.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
+
+yatzy.onclick = () => {
+  if (throwCount!= 0){
+    const num1 = (+sum.value + +yatzy.value);
+    const num2 = total.value;
+    total.value = parseInt(+num1 + +num2);
+    resetGame();
+  }
+}
