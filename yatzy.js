@@ -234,7 +234,7 @@ function getResults() {
 //------------------------------------------------------------------------------
 //------------------------------------------------------------------------------
 
-let resetGame = function () {
+let resetDice = function () {
   resetThrowCount();
   for (let i = 1; i <= 5; i++) {
     let dice = document.getElementById("dice"+i);
@@ -293,6 +293,19 @@ let sum = document.getElementById("15");
 let bonus = document.getElementById("16");
 let total = document.getElementById("17");
 
+let resetGame = function () {
+  if (end = true){
+    if (confirm("You Finished With A Total of " + total.value + 
+    " points! \n\nWould you like to play again?") === true) {
+      for (var i = 0; i <= 17; i++) {
+        let inputs = document.getElementById(i);
+        inputs.value = "";
+        inputs.disabled = false;
+        finished = 0;
+      }
+    }
+  }
+}
 
 // Gennemløber alle dice og kontroller om de bliver clicket, nok ikke effektivt, men 10 gange kortere end det før.
 
@@ -311,7 +324,7 @@ for (let i = 1; i <= 5; i++) {
 
 let finished = 0;
 
-for (var i = 0; i <= 17; i++) {
+for (var i = 0; i < 15; i++) {
   let inputs = document.getElementById(i);
   if (i < 6){
     inputs.onclick = () => {
@@ -322,26 +335,34 @@ for (var i = 0; i <= 17; i++) {
         inputs.disabled = true;
         finished++;
         console.log(finished);
-        resetGame();
+        resetDice();
       }
       if (sum.value >= 63){
         bonus.value = 50;
+      }
+      if (finished === 15){
+        end = true;
+        resetGame();
       }
     }
   }
   else {
     inputs.onclick = () => {
-      const num1 = (+sum.value + +inputs.value);
+      if (throwCount!= 0){
+        const num1 = (+sum.value + +inputs.value);
       const num2 = total.value;
       total.value = parseInt(+num1 + +num2);
       inputs.disabled = true;
       finished++;
       console.log(finished);
-      resetGame();
+      resetDice();
+      }
+      if (finished === 15){
+        end = true;
+        setTimeout(resetGame, 2000);
+      }
     }
   }
-  if (finished === 14){
-    alert("Du er færdig og har scoret" + total.value + "point!");
-    break;
-  }
 }
+
+let end = false;
