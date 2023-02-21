@@ -309,6 +309,8 @@ for (let i = 1; i <= 5; i++) {
 
 // Gennemløber alle inputs og kontroller om de bliver clicket, nok ikke effektivt, men 10 gange kortere end det før.
 
+let finished = 0;
+
 for (var i = 0; i <= 17; i++) {
   let inputs = document.getElementById(i);
   if (i < 6){
@@ -318,6 +320,8 @@ for (var i = 0; i <= 17; i++) {
         const num2 = inputs.value;
         sum.value = parseInt(+num1 + +num2);
         inputs.disabled = true;
+        finished++;
+        console.log(finished);
         resetGame();
       }
       if (sum.value >= 63){
@@ -331,7 +335,13 @@ for (var i = 0; i <= 17; i++) {
       const num2 = total.value;
       total.value = parseInt(+num1 + +num2);
       inputs.disabled = true;
+      finished++;
+      console.log(finished);
       resetGame();
     }
+  }
+  if (finished === 14){
+    alert("Du er færdig og har scoret" + total.value + "point!");
+    break;
   }
 }
