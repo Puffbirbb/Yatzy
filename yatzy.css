@@ -1,29 +1,55 @@
 .Dice li {
     display: inline;
+    padding: 10px;
 }
 
 img {
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 65px;
+    max-height: 65px;
 }
 
 button {
     /* float: right; */
     height: 50px;
-    margin-left: 90px;
+    width: 100px;
+    margin-left: 195px;
+    box-shadow: 0px -2px 5px rgba(0,0,0,.25) inset, 2px 2px 10px white inset;
 }
 
 #Dice-Container {
+    display: grid;
     border-collapse: collapse;
     padding: 4px;
-    border: 3px solid orangered;
+    border: 1px solid orangered;
+    padding-bottom: 25px;
+    column-gap: 30px;
+    text-align: center;
+    margin-bottom: 25px;
 }
 
 #Value-Container{
     display: grid;
-    grid-template-columns: auto auto;
-    padding: 25px;
-    border: 3px solid orangered;
+    grid-template-columns: auto 200px;
+    grid-auto-flow: column;
+    row-gap: 5px;
+    padding: 70px;
+    border: 1px solid orangered;
+
+    grid-template-areas:
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . ."
+            ". . . .";
 }
 
 #Value-Container input {
@@ -32,7 +58,8 @@ button {
 
 #Background {
     background: linear-gradient(360deg, orange 50%, yellow 100%);
+    width: 500px;
+    min-width: 500px;
+    margin:auto;
     padding: 25px;
-    width: 300px;
-    min-width: 300px;
 }
